@@ -1,27 +1,6 @@
-{% extends 'app/admin/base-trabajador.html' %}
+{% extends 'app/base.html' %}
 
 {% block js %}
-
-<script>
-    function eliminarPlato(id_plato){
-        Swal.fire({
-            "title":"¿Eliminar el plato?",
-            "text":"Una vez eliminado esta accion no se puede deshacer",
-            "icon":"warning",
-            "showCancelButton":true,
-            "cancelButtonText":"Cancelar",
-            "confirmButtonText":"Continuar",
-            "confirmButtonColor":"#dc3545"
-        })
-
-        .then(function(result){
-            if(result.isConfirmed){
-                window.location.href = "/eliminar-plato/" + id_plato + ""
-            }
-        })
-    }
-</script>
-
 {% endblock %}
 
 {% block contenido %}
@@ -29,7 +8,7 @@
 
 <div class="container-fluid px-10">
     <div class="mt-5">
-        <div class="col-md-10 offset-md-3">
+        <div class="col-md-10 offset-md-2">
             {% if messages %}
             {% for m in messages %}
             <div class="alert alert-success" role="alert">
@@ -59,56 +38,64 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-10 offset-md-8">
+        <div class="col-md-10 offset-md-2">
             <div class="container-fluid px-4">
                 <br>
                 <div class = "col-xl-11">
-                    <div class="card mb-10">
+                    <div class="table-responsive py-2">
                         <div class="card-header">
                             <i class="fas fa-table me-2"></i>
                             Lista de Platos
                         </div>
                         <div class="card-body">
                             <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Nombre Plato</th>
-                                        <th>Valor Plato</th>
-                                        <th>Descripción</th>
-                                        <th>Opciones</th>
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th>Nombre Plato</th>
-                                        <th>Valor Plato</th>
-                                        <th>Descripción</th>
-                                        <th>Opciones</th>
-                                    </tr>
-                                </tfoot>
-                                <tbody>
-                                    {% for p in plato %}
-                                        <tr class="table-light">
-                                            <td> {{ p.nom_plato }} </td>
-                                            <td> $ {{ p.valor_plato }} </td>
-                                            <td> {{ p.descripcion }} </td>
-                                            <td>
-                                                <a href="{% url 'modificar_plato' p.id_plato %}"
-                                                    class="btn btn-dark btn-sm">Modificar</a>
-                                                <a href="#" onclick="eliminarPlato({{ p.id_plato }})" 
-                                                    class="btn btn-danger btn-sm">Eliminar</a>
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
-                                </tbody>
+                                <tr class="table-active">
+                                    <th>Nombre Plato</th>
+                                    <th>Categoria</th>
+                                    <th>Valor Plato</th>
+                                    <th>Descripción</th>
+                                    <th>Opciónes</th>
+            
+                                </tr>
+            
+                                {% for p in plato %}
+                                <tr class="table-light">
+                                    <td> {{ p.nom_plato }} </td>
+                                    <td> {{ p.categoria }} </td>
+                                    <td> $ {{ p.valor_plato }} </td>
+                                    <td> {{ p.descripcion }} </td>
+                                    <td>
+                                        <a href="{% url 'modificar_plato' p.id_plato %}" class="btn btn-dark btn-sm">Modificar</a>
+                                        <a href="#" onclick="eliminarPlato({{p.id_plato}})" class="btn btn-danger btn-sm">Eliminar</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>    
-        
-        
     </div>
 </div>
+
+<script>
+    function eliminarPlato(id_plato){
+        Swal.fire({
+            "title":"¿Eliminar el plato?",
+            "text":"Una vez eliminado esta accion no se puede deshacer",
+            "icon":"warning",
+            "showCancelButton":true,
+            "cancelButtonText":"Cancelar",
+            "confirmButtonText":"Continuar",
+            "confirmButtonColor":"#dc3545"
+        })
+
+        .then(function(result){
+            if(result.isConfirmed){
+                window.location.href = "/eliminar-plato/" + id_plato + ""
+            }
+        })
+    }
+</script>
 {% endblock %}

@@ -24,6 +24,11 @@ class CustomUserCreationForm(UserCreationForm):
         fields = ['username',"first_name","last_name","password1","password2" ]
 
 
+class ProductoForm(forms.ModelForm):
+    class Meta:
+        model = Producto
+        fields = ['nom_prod','stock','tipo','estado','stock_min','valor']
+    
 
 
 

@@ -84,14 +84,21 @@ class proveedor(models.Model):
         return self.nom_prov
      
 
+estado = [
+    ['En Stock', "En Stock"],
+    ['Stock Bajo', "Stock Bajo"],
+    ['Stock Critico', "Stock Critico"],
+    ['Agotado', "Agotado"],
+    ]
+
 class Producto(models.Model):
     id_prod = models.AutoField(primary_key=True)
     nom_prod = models.CharField(max_length=50)  
     stock = models.CharField(max_length=50)  
     tipo = models.CharField(max_length=50) 
-    estado = models.CharField(max_length=50)
-    stock_min = models.IntegerField
+    estado = models.CharField(max_length=50, choices=estado, default='Agotado')
+    stock_min = models.IntegerField()
     valor = models.IntegerField()
 
     def __str__(self):
-        return self.nom_ing
+        return self.nom_prod

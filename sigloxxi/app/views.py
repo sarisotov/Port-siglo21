@@ -46,6 +46,10 @@ def carta (request):
     }
     return render(request, 'app/carta.html', data)
 
+
+# CRUD
+
+####  CARTA  ####
 def gestionar_carta(request):
     
     plato = Plato.objects.all()
@@ -92,6 +96,54 @@ def eliminar_plato(request,id_plato):
     plato.delete()
     messages.success(request, "Plato Eliminado Correctamente")
     return redirect(to="gestionar_carta")
+
+#### PRODUCTO ####
+def gestionar_producto(request):
+    
+    producto = Producto.objects.all()
+    data = {
+        'producto':producto,
+        'form':ProductoForm
+    }
+
+    if request.method == 'POST':
+        formulario = ProductoForm(data=request.POST, files=request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, "Producto Agregado Correctamente")
+        else:
+            data["form"] = formulario
+
+
+    return render(request, 'app/admin/producto/agregarProducto.html',data)
+
+
+def modificar_producto(request,id_prod):
+    
+    producto = get_object_or_404(Producto, id_prod=id_prod)
+
+    data = {
+        'form': ProductoForm(instance=producto)
+    }
+
+    if request.method == 'POST':
+        formulario = ProductoForm(
+            data=request.POST, instance=producto, files=request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, "Producto Modificado Correctamente")
+            return redirect(to="gestionar_producto")
+        else:
+            data["form"] = formulario
+
+    return render(request, 'app/admin/producto/modificarProducto.html', data)
+
+def eliminar_producto(request,id_prod):
+    
+    producto = get_object_or_404(Producto, id_prod=id_prod)
+    producto.delete()
+    messages.success(request, "Producto Eliminado Correctamente")
+    return redirect(to="gestionar_producto")
 
 
 
