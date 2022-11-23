@@ -9,6 +9,6 @@ class PlatoAdmin (admin.ModelAdmin):
     search_fields = ["nom_plato"]
 
 admin.site.register(Plato, PlatoAdmin)
-admin.site.register(Ingrediente)
+admin.site.register(Producto)
 admin.site.register(Pedido)
 admin.site.register(LineaPedido)

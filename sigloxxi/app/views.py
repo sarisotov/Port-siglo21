@@ -127,3 +127,20 @@ def gestionar_bodega(request):
 
 
     return render(request, 'app/admin/carta/gestionar-bodega.html',data)
+
+@login_required(login_url='/autenticacion/logear')
+def procesar_pedido(request):
+    pedido = Pedido.objects.create(user=request.user)
+    carrito = Carrito(request)
+    lineas_pedido=list()
+    for key, value in carrito.carrito.items():
+        lineas_pedido.append(LineaPedido(
+            id_plato=key,
+            cantidad=value["cantidad"],
+            user=request.user,
+            pedido=pedido,
+        ))
+
+    LineaPedido.objects.bulk_create(lineas_pedido)
+
+    messages.success(request, "Pedido realizado")

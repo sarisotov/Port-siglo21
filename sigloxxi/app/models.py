@@ -65,12 +65,33 @@ class LineaPedido(models.Model):
         ordering=['id']
 
 #equis
-class Ingrediente(models.Model):
-    id_ing = models.AutoField(primary_key=True)
-    nom_ing = models.CharField(max_length=50)  # This field type is a guess.
-    descp_ing = models.CharField(max_length=50)   # This field type is a guess.
-    tipo_ing = models.CharField(max_length=50)  # This field type is a guess.
-    estado_ing = models.CharField(max_length=50)
+class mesas(models.Model):
+    id_mesa=models.AutoField(primary_key=True)
+    descripcion=models.CharField(max_length=80)
+    max_pers=models.IntegerField()
+
+    def __str__(self):
+        return self.descripcion
+
+class proveedor(models.Model):
+    id_prov = models.AutoField(primary_key=True)
+    nom_prov=models.CharField(max_length=50)
+    mail=models.CharField(max_length=50)
+    fono=models.IntegerField()
+    direccion=models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.nom_prov
+     
+
+class Producto(models.Model):
+    id_prod = models.AutoField(primary_key=True)
+    nom_prod = models.CharField(max_length=50)  
+    stock = models.CharField(max_length=50)  
+    tipo = models.CharField(max_length=50) 
+    estado = models.CharField(max_length=50)
+    stock_min = models.IntegerField
+    valor = models.IntegerField()
 
     def __str__(self):
         return self.nom_ing
