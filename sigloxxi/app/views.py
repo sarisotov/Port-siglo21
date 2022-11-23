@@ -46,6 +46,13 @@ def carta (request):
     }
     return render(request, 'app/carta.html', data)
 
+def listarUsuarios (request):
+    user = User.objects.all()
+    data = {
+        'user': user
+    }
+    return render(request, 'registration/listarUss.html', data)
+
 
 # CRUD
 

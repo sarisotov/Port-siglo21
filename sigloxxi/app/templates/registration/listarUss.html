@@ -3,51 +3,41 @@
 {% block contenido %}
 
     {% load crispy_forms_tags %}
-    <div class="col-md-10 offset-md-8">
-        <div class="container-fluid px-4">
-            <br>
-            <div class = "col-xl-11">
-                <div class="card mb-10">
-                    <div class="card-header">
-                        <i class="fas fa-table me-2"></i>
-                        Lista de Funcionarios
-                    </div>
-                    <div class="card-body">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Usuario</th>
-                                    <th>Perfil</th>
-                                    <th>Opciones</th>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Usuario</th>
-                                    <th>Perfil</th>
-                                    <th>Opciones</th>
-                                </tr>
-                            </tfoot>
-                            <tbody>
-                                {% for p in Funcionario %}
-                                    <tr class="table-light">
-                                        <td> {{ p.nom_funcionario }} </td>
-                                        <td> {{ p.username }} </td>
-                                        <td> {{ p.perfil }} </td>
-                                        <td>
-                                            <a href="#"
-                                                class="btn btn-dark btn-sm">Modificar</a>
-                                            
-                                        </td>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-10 offset-md-2">
+                <div class="container-fluid px-4">
+                    <br>
+                    <div class = "col-xl-11">
+                        <div class="table-responsive py-2">
+                            <div class="card-header">
+                                <i class="fas fa-table me-2"></i>
+                                Lista de Funcionarios
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-striped">
+                                    <tr class="table-active">
+                                        <th>Nombre</th>
+                                        <th>Usuario</th>
+                                        <th>Perfil</th>
+                                        <th>Opciones</th>
                                     </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+    
+                                    {% for p in user %}
+                                    <tr class="table-light">
+                                        <td> {{ p.first_name }} </td>
+                                        <td> {{ p.last_name }} </td>
+                                        <td> {{ p.username }} </td>
+                                        
+                                    </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
+    
 {% endblock %}
