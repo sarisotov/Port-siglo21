@@ -23,12 +23,6 @@ class CustomUserCreationForm(UserCreationForm):
         model = User
         fields = ['username',"first_name","last_name","password1","password2" ]
 
-class FuncionarioForm(forms.ModelForm):
-
-    class Meta:
-        model = Funcionario
-        fields = ['username','nom_funcionario', 'perfil', 'contraseña1','contraseña2']
-
 
 
 

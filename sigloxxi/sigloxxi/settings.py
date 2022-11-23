@@ -91,7 +91,7 @@ WSGI_APPLICATION = 'sigloxxi.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'DB',
+        'NAME': 'BD',
         'USER': 'root',
         'PASSWORD': 'enna2510',
         'HOST': 'localhost',

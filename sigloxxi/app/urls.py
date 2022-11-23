@@ -10,7 +10,6 @@ urlpatterns = [
     path('registro/',registro,name="registro"),
     path('gestionar-bodega/',gestionar_bodega,name="gestionar_bodega"),
     path('base-trabajador/',base_trabajador,name="base_trabajador"),
-    path('listarUss/',listarUss,name="listarUss"),
     
     # CARRITO
     path('agregar/<int:id_plato>/', agregar_plato, name="Add"),
