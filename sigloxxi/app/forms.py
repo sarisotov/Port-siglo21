@@ -27,7 +27,37 @@ class CustomUserCreationForm(UserCreationForm):
 class ProductoForm(forms.ModelForm):
     class Meta:
         model = Producto
-        fields = ['nom_prod','stock','tipo','estado','stock_min','valor']
+        fields = ['nom_prod','stock','tipo','estado','stock_min','costo']
+    nom_prod = forms.CharField(max_length=50, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'Nombre del Producto'}), 
+        label='Nombre del Producto')
+    stock = forms.CharField(widget=forms.NumberInput(
+        attrs={'class': 'form-control', 'placeholder': 'Stock'}), 
+        label='Stock')
+    tipo = forms.CharField(max_length=50, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'Tipo del Producto'}), 
+        label='Tipo del Producto')
+    stock_min = forms.CharField(widget=forms.NumberInput(
+        attrs={'class': 'form-control', 'placeholder': 'Stock Minimo'}), 
+        label='Stock Minimo')
+    costo = forms.CharField(widget=forms.NumberInput(
+        attrs={'class': 'form-control', 'placeholder': 'Costo del Producto'}), 
+        label='Costo del Producto')
+    
+    
+
+
+class MesasForm(forms.ModelForm):
+    class Meta:
+        model = Mesas
+        fields = ['descripcion','max_pers','estadoMesa']
+    descripcion = forms.CharField(max_length=80, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'Descripcion de la Mesa'}), 
+        label='Descripcion de la Mesa')
+    max_pers = forms.CharField(max_length=2, widget=forms.NumberInput(
+        attrs={'class': 'form-control', 'placeholder': 'Capacidad de la Mesa'}), 
+        label='Capacidad de la Mesa')
+        
     
 
 

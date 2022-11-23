@@ -1,0 +1,71 @@
+{% extends 'app/base.html' %}
+
+{% load static %}
+
+{% block js %}
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block contenido %}
+
+{% load crispy_forms_tags %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            {% if messages %}
+            {% for m in messages %}
+            <div class="alert alert-success" role="alert">
+                {{m}}
+            </div>
+            {% endfor %}
+            {% endif %}
+            <div class="card">
+                <div class="card-body">
+                    <h2>Pedido</h2>
+                    <hr>
+                    <form action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% if request.session.carrito.items %}
+                        <tr>
+                            <td>Numero de Pedido : </td>
+                            <td> {{ response.amount}}</td>
+                            </tr>
+                            <tr>
+                            <td>Estado :</td>
+                            <td> {{ response.status}}</td>
+                            </tr>
+                            <tr>
+                            <td>Numero orden : </td>
+                            <td> {{ response.buy_order}}</td>
+                            </tr>
+                            <tr>
+                            <td>Numero sesion : </td>
+                            <td> {{ response.session_id}}</td>
+                            </tr>
+                            <tr>
+                            <td>detalle tarjeta : </td>
+                            <td> {{ response.card_detail}}</td>
+                            </tr>
+                            <tr>
+                            <td>Fecha autorización : </td>
+                            <td> {{ response.accounting_date}}</td>
+                            </tr>
+                            <tr>
+                        {% endif %}
+                        <br>
+                        
+                    </form>
+
+                </div>
+
+
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+{% endblock %}

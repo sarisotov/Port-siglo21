@@ -69,7 +69,6 @@ def gestionar_carta(request):
 
     return render(request, 'app/admin/carta/agregar.html',data)
 
-
 def modificar_plato(request,id_plato):
     
     plato = get_object_or_404(Plato, id_plato=id_plato)
@@ -117,7 +116,6 @@ def gestionar_producto(request):
 
     return render(request, 'app/admin/producto/agregarProducto.html',data)
 
-
 def modificar_producto(request,id_prod):
     
     producto = get_object_or_404(Producto, id_prod=id_prod)
@@ -144,6 +142,53 @@ def eliminar_producto(request,id_prod):
     producto.delete()
     messages.success(request, "Producto Eliminado Correctamente")
     return redirect(to="gestionar_producto")
+
+#### MESA ####
+def gestionar_mesas(request):
+    
+    mesas = Mesas.objects.all()
+    data = {
+        'mesas':mesas,
+        'form':MesasForm
+    }
+
+    if request.method == 'POST':
+        formulario = MesasForm(data=request.POST, files=request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, "Mesa Agregado Correctamente")
+        else:
+            data["form"] = formulario
+
+
+    return render(request, 'app/admin/mesas/agregarMesa.html',data)
+
+def modificar_mesas(request,id_mesa):
+    
+    mesas = get_object_or_404(Mesas, id_mesa=id_mesa)
+
+    data = {
+        'form': MesasForm(instance=mesas)
+    }
+
+    if request.method == 'POST':
+        formulario = MesasForm(
+            data=request.POST, instance=mesas, files=request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, "Mesa Modificado Correctamente")
+            return redirect(to="gestionar_mesas")
+        else:
+            data["form"] = formulario
+
+    return render(request, 'app/admin/mesas/modificarMesa.html', data)
+
+def eliminar_mesas(request,id_mesa):
+    
+    mesas = get_object_or_404(Mesas, id_mesa=id_mesa)
+    mesas.delete()
+    messages.success(request, "Mesa Eliminado Correctamente")
+    return redirect(to="gestionar_mesas")
 
 
 
@@ -196,3 +241,5 @@ def procesar_pedido(request):
     LineaPedido.objects.bulk_create(lineas_pedido)
 
     messages.success(request, "Pedido realizado")
+
+    return redirect(to="Pedidos")

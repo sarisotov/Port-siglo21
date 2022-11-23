@@ -25,6 +25,11 @@ urlpatterns = [
     path('gestionar-producto/',gestionar_producto,name="gestionar_producto"),
     path('eliminar-producto/<id_prod>',eliminar_producto,name="eliminar_producto"),
     path('modificar-producto/<id_prod>',modificar_producto,name="modificar_producto"),
+
+    # MESAS
+    path('gestionar-mesas/',gestionar_mesas,name="gestionar_mesas"),
+    path('eliminar-mesas/<id_mesa>',eliminar_mesas,name="eliminar_mesas"),
+    path('modificar-mesas/<id_mesa>',modificar_mesas,name="modificar_mesas"),
     
 
 ]

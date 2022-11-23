@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
 from django.db.models import F, Sum, FloatField
+from django import forms
 
 # Create your models here.
 
@@ -16,6 +17,12 @@ class Plato (models.Model):
 
     def __str__(self):
         return self.nom_plato
+
+    def clean_valor_plato(self):
+        nombre = self.cleaned_data['valor_plato']
+        if not nombre.isnumeric():
+            raise forms.ValidationError('El valor no puede contener letras')
+        return nombre
 
 estado_pedido = [
     ['Pendiente Pago', "Pendiente Pago"],
@@ -65,15 +72,23 @@ class LineaPedido(models.Model):
         ordering=['id']
 
 #equis
-class mesas(models.Model):
+estadoMesa = [
+    ['Disponible', "Disponible"],
+    ['Ocupada', "Ocupada"],
+    ['Pago Pendiente', "Pago Pendiente"],
+    ['Limpiando', "Limpiando"],
+    ]
+
+class Mesas(models.Model):
     id_mesa=models.AutoField(primary_key=True)
     descripcion=models.CharField(max_length=80)
     max_pers=models.IntegerField()
+    estadoMesa=models.CharField(max_length=50, choices=estadoMesa, default='Disponible')
 
     def __str__(self):
         return self.descripcion
 
-class proveedor(models.Model):
+class Proveedor(models.Model):
     id_prov = models.AutoField(primary_key=True)
     nom_prov=models.CharField(max_length=50)
     mail=models.CharField(max_length=50)
@@ -91,6 +106,8 @@ estado = [
     ['Agotado', "Agotado"],
     ]
 
+
+
 class Producto(models.Model):
     id_prod = models.AutoField(primary_key=True)
     nom_prod = models.CharField(max_length=50)  
@@ -98,7 +115,9 @@ class Producto(models.Model):
     tipo = models.CharField(max_length=50) 
     estado = models.CharField(max_length=50, choices=estado, default='Agotado')
     stock_min = models.IntegerField()
-    valor = models.IntegerField()
+    valor = models.IntegerField(default=0)
+    costo = models.IntegerField()
+
 
     def __str__(self):
         return self.nom_prod

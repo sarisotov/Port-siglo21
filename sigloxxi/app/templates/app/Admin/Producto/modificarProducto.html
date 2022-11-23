@@ -1,0 +1,49 @@
+{% extends 'app/base.html' %}
+
+{% load static %}
+
+{% block js %}
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block contenido %}
+
+{% load crispy_forms_tags %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            {% if messages %}
+            {% for m in messages %}
+            <div class="alert alert-success" role="alert">
+                {{m}}
+            </div>
+            {% endfor %}
+            {% endif %}
+            <div class="card">
+                <div class="card-body">
+                    <h2>Editar Producto</h2>
+                    <hr>
+                    <form action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form | crispy}}
+                        <br>
+                        <div class="form-group">
+                            <input type="submit" value="Guardar" class="btn btn-dark btn-round btn-block">
+                            <input type="reset" value="Cancelar" class="btn btn-dark btn-round btn-block">
+                                    
+                        </div>
+                    </form>
+
+                </div>
+
+
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+{% endblock %}
