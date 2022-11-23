@@ -1,0 +1,53 @@
+{% extends 'app/base.html' %}
+
+{% block contenido %}
+
+    {% load crispy_forms_tags %}
+    <div class="col-md-10 offset-md-8">
+        <div class="container-fluid px-4">
+            <br>
+            <div class = "col-xl-11">
+                <div class="card mb-10">
+                    <div class="card-header">
+                        <i class="fas fa-table me-2"></i>
+                        Lista de Funcionarios
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Usuario</th>
+                                    <th>Perfil</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Usuario</th>
+                                    <th>Perfil</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                {% for p in Funcionario %}
+                                    <tr class="table-light">
+                                        <td> {{ p.nom_funcionario }} </td>
+                                        <td> {{ p.username }} </td>
+                                        <td> {{ p.perfil }} </td>
+                                        <td>
+                                            <a href="#"
+                                                class="btn btn-dark btn-sm">Modificar</a>
+                                            
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+{% endblock %}
