@@ -1,0 +1,7 @@
+cx-Oracle
+Django
+django-crispy-forms
+menuinst
+Pillow
+django-filter
+fontawesome-free
