@@ -58,7 +58,22 @@ class MesasForm(forms.ModelForm):
         attrs={'class': 'form-control', 'placeholder': 'Capacidad de la Mesa'}), 
         label='Capacidad de la Mesa')
         
-    
+class ProveedorForm(forms.ModelForm):
+    class Meta:
+        model = Proveedor
+        fields = ['nom_prov','mail','fono','direccion']
+    nom_prov = forms.CharField(max_length=50, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'Nombre del Proveedor'}), 
+        label='Nombre del Proveedor')
+    mail = forms.EmailField(max_length=50, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'Correo'}), 
+        label='Correo')
+    fono = forms.CharField(min_length=8, max_length=12, widget=forms.NumberInput(
+        attrs={'class': 'form-control', 'placeholder': 'Celular Proveedor'}), 
+        label='Celular Proveedor')
+    direccion = forms.CharField(max_length=50, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'Direccion del Proveedor'}), 
+        label='Direccion del Proveedor')
 
 
 

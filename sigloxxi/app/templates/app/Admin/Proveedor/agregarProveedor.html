@@ -1,0 +1,101 @@
+{% extends 'app/base.html' %}
+
+{% block js %}
+{% endblock %}
+
+{% block contenido %}
+{% load crispy_forms_tags %}
+
+<div class="container-fluid px-10">
+    <div class="mt-5">
+        <div class="col-md-10 offset-md-2">
+            {% if messages %}
+            {% for m in messages %}
+            <div class="alert alert-success" role="alert">
+                {{m}}
+            </div>
+            {% endfor %}
+            {% endif %}
+            <div class="container-fluid px-4">
+                <div class="row">
+                    <div class = "col-xl-6">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h2>Agregar Proveedor</h2>
+                                <hr>
+                                <form action="" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    {{ form | crispy}}
+                                    <br>
+                                    <div class="form-group">
+                                        <input type="submit" value="Guardar" class="btn btn-dark btn-round btn-block">
+                                        <input type="reset" value="Cancelar" class="btn btn-dark btn-round btn-block">
+                                    </div>
+                                </form>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10 offset-md-2">
+            <div class="container-fluid px-4">
+                <br>
+                <div class = "col-xl-11">
+                    <div class="table-responsive py-2">
+                        <div class="card-header">
+                            <i class="fas fa-table me-2"></i>
+                            Lista de Proveedores
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <tr class="table-active">
+                                    <th>Nombre Proveedor</th>
+                                    <th>Correo</th>
+                                    <th>Celular</th>
+                                    <th>Direccion</th>
+                                    <th>Opciónes</th>
+            
+                                </tr>
+
+                                {% for p in proveedor %}
+                                <tr class="table-light">
+                                    <td> {{ p.nom_prov }} </td>
+                                    <td> {{ p.mail }} </td>
+                                    <td> {{ p.fono }} </td>
+                                    <td> {{ p.direccion }} </td>
+                                    <td>
+                                        <a href="{% url 'modificar_proveedores' p.id_prov %}" class="btn btn-dark btn-sm">Modificar</a>
+                                        <a href="#" onclick="eliminarProveedor({{p.id_prov}})" class="btn btn-danger btn-sm">Eliminar</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div>
+</div>
+
+<script>
+    function eliminarProveedor(id_prov){
+        Swal.fire({
+            "title":"¿Eliminar el producto?",
+            "text":"Una vez eliminado esta accion no se puede deshacer",
+            "icon":"warning",
+            "showCancelButton":true,
+            "cancelButtonText":"Cancelar",
+            "confirmButtonText":"Continuar",
+            "confirmButtonColor":"#dc3545"
+        })
+
+        .then(function(result){
+            if(result.isConfirmed){
+                window.location.href = "/eliminar-proveedores/" + id_prov + ""
+            }
+        })
+    }
+</script>
+{% endblock %}

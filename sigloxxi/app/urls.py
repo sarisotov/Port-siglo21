@@ -31,6 +31,12 @@ urlpatterns = [
     path('gestionar-mesas/',gestionar_mesas,name="gestionar_mesas"),
     path('eliminar-mesas/<id_mesa>',eliminar_mesas,name="eliminar_mesas"),
     path('modificar-mesas/<id_mesa>',modificar_mesas,name="modificar_mesas"),
-    
+
+    # PROVEEDORES
+    path('gestionar-proveedores/',gestionar_proveedores,name="gestionar_proveedores"),
+    path('eliminar-proveedores/<id_prov>',eliminar_proveedores,name="eliminar_proveedores"),
+    path('modificar-proveedores/<id_prov>',modificar_proveedores,name="modificar_proveedores"),
+
+
 
 ]
