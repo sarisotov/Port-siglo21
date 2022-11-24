@@ -18,11 +18,15 @@ class PlatoForm(forms.ModelForm):
     Imagen = forms.ImageField()
 
 class CustomUserCreationForm(UserCreationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args,**kwargs)
+        self.fields['first_name'].widget.attrs['autofocus'] = True
+
     class Meta:
         model = User
-        fields = ['username',"first_name","last_name","password1","password2" ]
+        fields = ['username',"first_name","last_name","password1","password2","groups" ]
+                
     
-
 
 class ProductoForm(forms.ModelForm):
     class Meta:
@@ -44,8 +48,6 @@ class ProductoForm(forms.ModelForm):
         attrs={'class': 'form-control', 'placeholder': 'Costo del Producto'}), 
         label='Costo del Producto')
     
-    
-
 
 class MesasForm(forms.ModelForm):
     class Meta:
